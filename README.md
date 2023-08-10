@@ -14,12 +14,17 @@ Use Laravel's caching system to improve performance.
     >  Cache::remember($requestKey, 10, function () { . . . }
 
 Include any necessary SQL schema and migration files in your repository.
- > No specific preferences, just ensure that the 'store' database exists before running the migration.
+    > Basic configuration is needed
+        > run "composer update" or "composer install"
+        > copy ".env.example" as ".env", and change necessary setting if needed
+        > Please create a database based on the "DB_DATABASE", or you can path your own existing DB
+        > run migration and seeder
 
 After migration here are the default users can be used:
-> Admin:
-    > UN: admin@gmail.com
-    > PW: password
-> Non-Admin
-    > UN: normal@gmail.com
-    > PW: password
+    > Admin:
+        > UN: admin@gmail.com
+        > PW: password
+
+    > Non-Admin
+        > UN: normal@gmail.com
+        > PW: password
