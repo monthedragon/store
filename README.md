@@ -14,6 +14,7 @@ Use Laravel's caching system to improve performance.
     >  Cache::remember($requestKey, 10, function () { . . . }
 
 Include any necessary SQL schema and migration files in your repository.
+
     > Basic configuration is needed
         > run "composer update" or "composer install"
         > copy ".env.example" as ".env", and change necessary setting if needed
