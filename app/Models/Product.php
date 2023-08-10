@@ -13,8 +13,6 @@ class Product extends Model
     
     /**
      * Query Scope
-     * This will be called in Controller via ->customFunctionName()
-     * And Laravel will append the 'scope' automatically
      */
     public function scopeFilterResult($query, array $filter){
 

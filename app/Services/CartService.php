@@ -110,7 +110,10 @@ class CartService
     }
 
     public function checkOutOrder(Order $order){
+        if($order->orderDetail()->count() == 0) return false;
+
         $order->update(['status'=>$this->_checkout_status]);
+        return true;
     }
 
     public function getUserActiveOrderList($userId){

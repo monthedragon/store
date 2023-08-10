@@ -20,7 +20,7 @@ class OrderController extends Controller
 
         if(auth()->user()->can('isAdmin')){
             //For admin, display all the available orders
-            $orders = Order::with(['user'])->paginate(10);
+            $orders = Order::with(['user'])->orderBy('created_at','DESC')->paginate(10);
             return view('order.index', ['orders' => $orders]);
         }else{
             //For regular user, display active order
@@ -73,8 +73,11 @@ class OrderController extends Controller
     
     //checking out the orders
     public function checkOut(Order $order){ 
-        $this->cartService->checkOutOrder($order);
-        return redirect('order')->with(['msg' => 'Order successfully checked out']);
+        if($this->cartService->checkOutOrder($order)){
+            return redirect('order')->with(['msg' => 'Order successfully checked out']);
+        }else{
+            return back()->with(['err_msg' => 'Empty order can\'t be checked out']);
+        }
     }
 }
 	

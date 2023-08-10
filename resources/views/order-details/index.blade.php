@@ -22,11 +22,14 @@
                     }}</span>
             </td>
             <td class='flex justify-end'>
+                @if($order->status == 1 && $order->orderDetail->count())
                 <form action="/order/checkout/{{$order->id}}" method=POST>
                     @csrf
                     @method('PATCH')
-                    <button class='bg-green-500 rounded p-2 hover:bg-green-600 text-white general-confirm'>Checkout</button>
+                    <button class='bg-green-500 rounded p-2 hover:bg-green-600 text-white general-confirm '>Checkout</button>
                 </form>
+                @endif
+                <a href="/order" class='ml-2 bg-gray-300 hover:bg-gray-400  p-2 rounded text-black'>Back</a>
             </td>
         </tr>
     </table>
@@ -62,11 +65,12 @@
             <tr>
                 <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm w-6/12">
                     <div class="flex items-center">
-                        <div class="flex-shrink-0 w-10 h-10">
-                            {{-- TODO add product image --}}
-                            <img class='rounded ' src="https://i.pravatar.cc/50?u={{$details->product->id}} "
-                                alt="Random Image">
-                        </div>
+                        
+                        {{-- TODO add product image --}}
+                        {{-- <div class="flex-shrink-0 w-10 h-10"> --}}
+                            {{-- <img class='rounded ' src="https://i.pravatar.cc/50?u={{$details->product->id}} "
+                                alt="Random Image"> --}}
+                        {{-- </div> --}}
                         <div class="ml-3">
                             <p class="text-gray-900 whitespace-no-wrap">
                                 {{$details->product->name}}
