@@ -17,8 +17,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/', [ProductController::class,'index']);
+
+//limiter can be adjusted
+Route::middleware('throttle:100,1')->group(function(){ 
+    Route::get('/product', [ProductController::class,'index'])->name('product');
+    Route::post('/product', [ProductController::class,'index'])->name('product'); //search product
 });
 
 Route::get('/dashboard', function () {
@@ -29,11 +33,6 @@ require __DIR__.'/auth.php';
 
 Route::middleware('auth')->group(function(){
 
-    //limiter can be adjusted
-    Route::middleware('throttle:100,1')->group(function(){ 
-        Route::get('/product', [ProductController::class,'index'])->name('product');
-        Route::post('/product', [ProductController::class,'index'])->name('product'); //search product
-    });
     
     Route::middleware('can:isAdmin')->group(function(){
         //admin
@@ -44,7 +43,6 @@ Route::middleware('auth')->group(function(){
         Route::delete('/product/{product}',[ProductController::class,'destroy']); 
         Route::patch('/order/cancel/{order}',[OrderController::class,'cancel']);
         Route::patch('/order/ship/{order}',[OrderController::class,'ship']);
-        Route::patch('/order/checkout/{order}',[OrderController::class,'checkOut']);
         
     });
     
@@ -53,6 +51,7 @@ Route::middleware('auth')->group(function(){
     
     //limiter can be adjusted
     Route::middleware('throttle:100,1')->group(function(){
+        Route::patch('/order/checkout/{order}',[OrderController::class,'checkOut']);
         Route::get('/order', [OrderController::class, 'index'])->name('order');
         Route::get('/order/{order}', [OrderController::class, 'show']);
         Route::delete('/order_detail/remove/{orderDetail}', [OrderDetailController::class, 'destroy']);

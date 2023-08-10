@@ -6,7 +6,7 @@
     </x-slot>
 
     <section class="bg-white dark:bg-gray-900">
-        <div class="mx-auto max-w-4xl lg:py-16">
+        <div class="mx-auto max-w-4xl">
             <form action="/product/{{$product->id}}" method=POST>
                 @csrf
                 @method('PATCH')

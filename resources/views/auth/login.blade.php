@@ -51,6 +51,9 @@
                     {{ __('Log in') }}
                 </x-button>
             </div>
+            <div class="flex text-sm underline text-gray-600 hover:text-gray-900 pt-2" >
+                <a href="/register">Sign-up</a>
+            </div>
         </form>
     </x-auth-card>
 </x-guest-layout>

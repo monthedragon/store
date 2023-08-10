@@ -74,11 +74,16 @@
 
                             <td class="px-5 py-5 border-b border-gray-200 bg-white text-xs">
                                 <div class="flex text-xs">
-                                    <form class='ajax-form' method=POST action="/add_to_cart/{{ $product->id }}">
-                                        @csrf
-                                        <button class='w-20 bg-green-200 p-2 rounded-xl hover:bg-green-400'> Add to
-                                            cart</button>
-                                    </form>
+                                    @auth
+                                        <form class='ajax-form' method=POST action="/add_to_cart/{{ $product->id }}">
+                                            @csrf
+                                            <button class='w-20 bg-green-200 p-2 rounded-xl hover:bg-green-400'> Add to
+                                                cart</button>
+                                        </form>
+                                    @else
+                                        <p class='text-xs italic text-red-700 text-center'>Login to add order</p>
+                                    @endauth
+
                                     @can('isAdmin')
                                     <a class='ml-2 p-2' href="/product/{{$product->id}}">view</a>
 

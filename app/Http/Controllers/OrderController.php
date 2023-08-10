@@ -15,6 +15,7 @@ class OrderController extends Controller
     public function __construct(CartService $cartService){
         $this->cartService = $cartService;
     }
+
     public function index(){
 
         if(auth()->user()->can('isAdmin')){
@@ -38,7 +39,7 @@ class OrderController extends Controller
         return view('order-details.index', ['order' => $order, 'orderDetails' => $orderDetails]);
     }
 
-    //
+    //Main entry of saving the order
     public function store(Product $product){ 
         try{
 
@@ -58,16 +59,19 @@ class OrderController extends Controller
         }
     }
 
+    //Cancelling the orders
     public function cancel(Order $order){ 
         $this->cartService->cancelOrder($order->id);
         return redirect('order')->with(['msg' => 'Order successfully cancelled']);
     }
     
+    //Shipping the orders
     public function ship(Order $order){ 
         $this->cartService->shipOrder($order->id);
         return redirect('order')->with(['msg' => 'Order successfully shipped']);
     }
     
+    //checking out the orders
     public function checkOut(Order $order){ 
         $this->cartService->checkOutOrder($order);
         return redirect('order')->with(['msg' => 'Order successfully checked out']);

@@ -11,7 +11,7 @@ use Symfony\Component\Console\Input\Input;
 
 class ProductController extends Controller
 {
-    //
+    
     public function index(){
         
         if(request('name') || request('page')){
@@ -33,6 +33,8 @@ class ProductController extends Controller
         return view('product.create');
     }
 
+    //storing the products
+    //TODO add thumbnail
     public function store(Request $request){
 
         $attributes = $request->validate([
