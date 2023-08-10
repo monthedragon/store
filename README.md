@@ -21,6 +21,7 @@ Include any necessary SQL schema and migration files in your repository.
         > run migration and seeder
 
 After migration here are the default users can be used:
+
     > Admin:
         > UN: admin@gmail.com
         > PW: password
